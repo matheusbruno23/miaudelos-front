@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from "./styles/GlobalStyle";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import SignUpPage from "./pages/SignUpPage/SignUpPage"
+import CatsPage from "./pages/CatsPage/CatsPage"
+import CatsIdPage from "./pages/CatIdPage/CatIdPage"
+import UserPage from "./pages/UserPage/UserPage"
+import { useState } from "react";
+import { UserContext } from "./contexts/UserContext";
 
-function App() {
+export default function App() {
+
+  const [user, setUser]= useState({})
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+    <UserContext.Provider value ={{user, setUser}}>
+    <Routes>
+    <Route path="/" element={<LoginPage/>}/>
+    <Route path="/signup" element={<SignUpPage/>}/>
+    <Route path="/cats" element={<CatsPage/>}/>
+    <Route path="/cats/:id" element={<CatsIdPage/>}/>
+    <Route path="/me" element={<UserPage/>}/>
+    </Routes>
+    </UserContext.Provider>
+    <GlobalStyle/>
+    </BrowserRouter>
   );
 }
 
-export default App;
