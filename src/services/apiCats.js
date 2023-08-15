@@ -13,12 +13,17 @@ function getCats(token){
 }
 
 
-function createCat(token){
+function getCatById(token, id){
 
 }
 
-function updateCat(token){
+function createCat(token, id){
 
+}
+
+function updateCat(token, id){
+    const promise = axios.put(`${BASE_URL}/${id}`, createConfig(token))
+    return promise
 }
 
 const apiCats = {getCats, createCat , updateCat}
